@@ -1,8 +1,9 @@
 /// <reference path="TimePlan.ts" />
 module Simulation.TimePlanFactory {
+    "use strict";
     var timePlans: Array<TimePlan> = new Array();
 
-    export function clear() {
+    export function clear(): void {
         timePlans = new Array();
     }
 
@@ -18,7 +19,7 @@ module Simulation.TimePlanFactory {
     }
 
     export function removeTimePlan(name: string): TimePlan {
-        var result = undefined;
+        var result:TimePlan = undefined;
         if (hasTimePlan(name)) {
             result = getTimePlan(name);
             timePlans[name] = undefined;

@@ -1,4 +1,4 @@
-var __extends = this.__extends || function (d, b) {
+﻿var __extends = this.__extends || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
     __.prototype = b.prototype;
@@ -9,6 +9,7 @@ var __extends = this.__extends || function (d, b) {
 /// <reference path="..\DataStructures\PairingHeap.ts" />
 var Simulation;
 (function (Simulation) {
+    "use strict";
     var Event = (function (_super) {
         __extends(Event, _super);
         function Event(time) {
@@ -40,7 +41,7 @@ var Simulation;
         TimePlan.prototype.addEvent = function (node) {
             if (node !== undefined) {
                 _super.prototype.addNode.call(this, node);
-                if (node.compare(this.root) == 0) {
+                if (node.compare(this.root) === 0) {
                     this.nextTime = node.priority();
                 }
             }

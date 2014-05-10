@@ -6,6 +6,7 @@
 };
 var Simulation;
 (function (Simulation) {
+    "use strict";
     var EventSimulator = (function (_super) {
         __extends(EventSimulator, _super);
         function EventSimulator() {

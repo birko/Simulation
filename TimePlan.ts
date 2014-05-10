@@ -1,8 +1,8 @@
 /// <reference path="..\DataStructures\Tree.ts" />
 /// <reference path="..\DataStructures\BinaryTree.ts" />
 /// <reference path="..\DataStructures\PairingHeap.ts" />
-module Simulation
-{
+module Simulation {
+    "use strict";
     export class Event extends DataStructures.Tree.AbstractPairingHeapNode {
         time: number;
 
@@ -19,6 +19,7 @@ module Simulation
 
     export class TimePlan extends DataStructures.Tree.PairingHeap {
         nextTime: number;
+        root: Event;
 
         constructor() {
             super();
@@ -37,15 +38,15 @@ module Simulation
         addEvent(node: Event): DataStructures.Tree.ITreeInterface {
             if (node !== undefined) {
                 super.addNode(node);
-                if (node.compare(this.root) == 0) {
+                if (node.compare(this.root) === 0) {
                     this.nextTime = node.priority();
                 }
             }
             return this;
         }
 
-        removeMinPriorityEvent(): DataStructures.Tree.IPairingHeapNodeInterface {
-            var result = super.removeMinPriority();
+        removeMinPriorityEvent(): Event {
+            var result:Event = <Event>super.removeMinPriority();
             if (this.root !== undefined) {
                 this.nextTime = this.root.priority();
             } else {
@@ -54,7 +55,7 @@ module Simulation
             return result;
         }
 
-        getMinpriorityEvent(): DataStructures.Tree.IPairingHeapNodeInterface {
+        getMinpriorityEvent(): Event {
             return this.root;
         }
     }

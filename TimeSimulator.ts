@@ -1,4 +1,5 @@
 ﻿module Simulation {
+    "use strict";
     export class TimeSimulator extends Simulator {
         private period: number = undefined;
         private pausePeriod:number = undefined;
@@ -19,12 +20,12 @@
         }
 
         private getTikPeriod(): number {
-            var tikPeriod = this.getPeriod();
-            if (this.pausePeriod != undefined) {
+            var tikPeriod: number = this.getPeriod();
+            if (this.pausePeriod !== undefined) {
                 tikPeriod = this.pausePeriod;
                 this.pausePeriod = undefined;
 
-            } 
+            }
             return tikPeriod / this.getSpeed();
         }
 
@@ -32,11 +33,11 @@
             return this.speed;
         }
 
-        setSpeed(speed: number) {
+        setSpeed(speed: number): void {
             this.speed = speed;
         }
 
-        setCurrentTime(time: number) {
+        setCurrentTime(time: number): void {
             super.setCurrentTime(time);
             clearTimeout(this.timeOut);
             this.timeOut = undefined;
@@ -44,27 +45,27 @@
             this.simulate();
         }
 
-        pause() {
+        pause(): void {
             super.pause();
             clearTimeout(this.timeOut);
-            var now = new Date();
+            var now: Date = new Date();
             this.pausePeriod = (now.valueOf() - this.timeOutTime.valueOf());
             this.timeOutTime = undefined;
         }
 
-        resume() {
+        resume(): void {
             super.resume();
             this.simulate();
         }
 
-        simulate() {
+        simulate(): void {
             if (!this.pause()) {
                 this.timeOutTime = new Date();
-                var toTime = this.getTikPeriod();
-                this.timeOut = setTimeout(() => {
-                    var time = this.getCurretTime() + this.getPeriod();
+                var toTime:number = this.getTikPeriod();
+                this.timeOut = setTimeout(function(): void {
+                    var time:number = this.getCurretTime() + this.getPeriod();
                     this.setCurrentTime(time);
-                }, toTime);
+                }.bind(this), toTime);
             }
         }
     }

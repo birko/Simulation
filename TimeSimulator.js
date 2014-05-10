@@ -6,6 +6,7 @@
 };
 var Simulation;
 (function (Simulation) {
+    "use strict";
     var TimeSimulator = (function (_super) {
         __extends(TimeSimulator, _super);
         function TimeSimulator(timePlan, period) {
@@ -25,7 +26,7 @@ var Simulation;
 
         TimeSimulator.prototype.getTikPeriod = function () {
             var tikPeriod = this.getPeriod();
-            if (this.pausePeriod != undefined) {
+            if (this.pausePeriod !== undefined) {
                 tikPeriod = this.pausePeriod;
                 this.pausePeriod = undefined;
             }
@@ -62,14 +63,13 @@ var Simulation;
         };
 
         TimeSimulator.prototype.simulate = function () {
-            var _this = this;
             if (!this.pause()) {
                 this.timeOutTime = new Date();
                 var toTime = this.getTikPeriod();
                 this.timeOut = setTimeout(function () {
-                    var time = _this.getCurretTime() + _this.getPeriod();
-                    _this.setCurrentTime(time);
-                }, toTime);
+                    var time = this.getCurretTime() + this.getPeriod();
+                    this.setCurrentTime(time);
+                }.bind(this), toTime);
             }
         };
         return TimeSimulator;

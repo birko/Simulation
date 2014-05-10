@@ -1,6 +1,7 @@
 ﻿/// <reference path="TimePlan.ts" />
 var Simulation;
 (function (Simulation) {
+    "use strict";
     var Simulator = (function () {
         function Simulator(timePlan) {
             this.timePlan = null;
@@ -66,9 +67,10 @@ var Simulation;
                 events.push(event);
             }
 
-            for (var i = 0; i < events.length; i++) {
-                throw new Error('Implementation missing');
-            }
+            // webworker?
+            events.forEach(function (value, index) {
+                throw new Error("Implementation missing");
+            });
         };
 
         Simulator.prototype.addEvent = function (time) {

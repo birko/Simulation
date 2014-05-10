@@ -1,7 +1,8 @@
 ﻿/// <reference path="TimePlan.ts" />
 module Simulation {
+    "use strict";
     export class Simulator {
-        private timePlan :TimePlan= null;
+        private timePlan: TimePlan = null;
         private currentTime: number = undefined;
         private paused: boolean = false;
 
@@ -15,11 +16,11 @@ module Simulation {
             return this.paused;
         }
 
-        pause() {
+        pause():void {
             this.paused = true;
         }
 
-        resume() {
+        resume():void {
             this.paused = false;
         }
 
@@ -41,12 +42,12 @@ module Simulation {
             return true;
         }
 
-        stop() {
+        stop():void {
             this.timePlan.clear();
             this.currentTime = undefined;
         }
 
-        setCurrentTime(currentTime: number) {
+        setCurrentTime(currentTime: number):void {
             if (!this.isPause()) {
                 this.currentTime = currentTime;
                 if (this.getCurretTime() !== undefined) {
@@ -59,24 +60,23 @@ module Simulation {
             return this.currentTime;
         }
 
-        execute() {
-            var events = new Array();
-            var time = this.getNextTime();
+        execute(): void {
+            var events: Array<Event> = new Array();
+            var time:number = this.getNextTime();
             while (this.getNextTime() <= this.getCurretTime()) {
-                var event = this.timePlan.removeMinPriorityEvent();
+                var event: Event = <Event>this.timePlan.removeMinPriorityEvent();
                 events.push(event);
             }
-            //webworker?
-            for (var i = 0; i < events.length; i++) {
-                //runevent
-                throw new Error('Implementation missing');
-            }
+            // webworker?
+            events.forEach(function (value: Event, index: number): void {
+                throw new Error("Implementation missing");
+            });
         }
 
-        addEvent(time: number) {
+        addEvent(time: number): void {
             if (this.timePlan !== undefined) {
                 time += this.getCurretTime();
-                var event = new Event(time);
+                var event: Event = new Event(time);
                 this.timePlan.addEvent(event);
             }
         }
