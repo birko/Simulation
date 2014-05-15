@@ -1,4 +1,4 @@
-﻿var Simulation;
+var Simulation;
 (function (Simulation) {
     /// <reference path="TimePlan.ts" />
     (function (TimePlanFactory) {
