@@ -3,60 +3,91 @@
 /// <reference path="..\DataStructures\PairingHeap.ts" />
 module Simulation {
     "use strict";
-    export class Event extends DataStructures.Tree.AbstractPairingHeapNode {
-        time: number;
+    export interface EventFunction {
+        (): void;
+    }
 
-        constructor(time: number) {
+    export class Event extends DataStructures.Tree.AbstractPairingHeapNode {
+        private time: number;
+        private func: EventFunction = null;
+
+        constructor(time: number, func: EventFunction = null) {
             super();
             this.time = time;
+            this.func = func;
         }
 
-        priority(): number {
+        public priority(): number {
             return this.time;
         }
 
+        /// TODO: Async await, promise
+        /*async*/ public execute(): Event {
+            if (this.func !== undefined && this.func !== null)
+            {
+                /*await*/ this.func();
+            }
+            return this;
+        }
     }
 
     export class TimePlan extends DataStructures.Tree.PairingHeap {
-        nextTime: number;
-        root: Event;
+        private nextTime: number;
 
         constructor() {
             super();
-            this.nextTime = undefined;
+            this.setNextTime(undefined);
         }
 
-        isEmpty(): boolean {
-            return this.root === undefined;
+        public getNextTime(): number {
+            return this.nextTime;
         }
 
-        clear(): TimePlan {
-            this.root = undefined;
+        public setNextTime(time: number): TimePlan {
+            this.nextTime = time;
             return this;
         }
 
-        addEvent(node: Event): DataStructures.Tree.ITreeInterface {
+        public getRoot(): Event{
+            return <Event>super.getRoot();
+        }
+
+        public setRoot(root: Event): TimePlan {
+            super.setRoot(root);
+            return this;
+        }
+
+        public isEmpty(): boolean {
+            return this.getRoot() === null;
+        }
+
+        public clear(): TimePlan {
+            this.setRoot(null);
+            return this;
+        }
+
+        public addEvent(node: Event): TimePlan {
             if (node !== undefined) {
                 super.addNode(node);
-                if (node.compare(this.root) === 0) {
-                    this.nextTime = node.priority();
+                if (node.compare(this.getRoot()) === 0) {
+                    this.setNextTime(node.priority());
                 }
             }
             return this;
         }
 
-        removeMinPriorityEvent(): Event {
-            var result:Event = <Event>super.removeMinPriority();
-            if (this.root !== undefined) {
-                this.nextTime = this.root.priority();
+        public removeMinPriorityEvent(): Event {
+            var result: Event = <Event>super.removeMinPriority();
+            if (!this.isEmpty()) {
+                this.setNextTime(this.getRoot().priority());
             } else {
-                this.nextTime = undefined;
+                this.setNextTime(undefined);
             }
             return result;
         }
 
-        getMinpriorityEvent(): Event {
-            return this.root;
+        public getMinpriorityEvent(): Event {
+            return this.getRoot();
         }
     }
 }

@@ -1,29 +1,17 @@
 /// <reference path="TimePlan.ts" />
-module Simulation.TimePlanFactory {
+/// <reference path="..\DataStructures\Types.ts" />
+module Simulation {
     "use strict";
-    var timePlans: Array<TimePlan> = new Array();
+    export module TimePlanSingleton {
+        var instance: TimePlanFactory = null;
 
-    export function clear(): void {
-        timePlans = new Array();
-    }
-
-    export function hasTimePlan(name: string): boolean {
-        return timePlans[name] !== undefined;
-    }
-
-    export function getTimePlan(name: string): TimePlan {
-        if (!hasTimePlan(name)) {
-            timePlans[name] = new TimePlan();
+        export function getInstance(): TimePlanFactory {
+            if (instance === null || instance === undefined) {
+                instance = new TimePlanFactory();
+            }
+            return instance;
         }
-        return timePlans[name];
     }
 
-    export function removeTimePlan(name: string): TimePlan {
-        var result:TimePlan = undefined;
-        if (hasTimePlan(name)) {
-            result = getTimePlan(name);
-            timePlans[name] = undefined;
-        }
-        return result;
-    }
+    export class TimePlanFactory extends DataStructures.AbstractFactory<TimePlan> {}
 }

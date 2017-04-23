@@ -15,7 +15,7 @@
             this.speed = 1;
         }
 
-        getPeriod(): number {
+        public getPeriod(): number {
             return this.period;
         }
 
@@ -29,37 +29,40 @@
             return tikPeriod / this.getSpeed();
         }
 
-        getSpeed(): number {
+        public getSpeed(): number {
             return this.speed;
         }
 
-        setSpeed(speed: number): void {
+        public setSpeed(speed: number): TimeSimulator {
             this.speed = speed;
+            return this;
         }
 
-        setCurrentTime(time: number): void {
+        public setCurrentTime(time: number): TimeSimulator {
             super.setCurrentTime(time);
             clearTimeout(this.timeOut);
             this.timeOut = undefined;
             this.timeOutTime = undefined;
             this.simulate();
+            return this;
         }
 
-        pause(): void {
+        public pause(): TimeSimulator {
             super.pause();
             clearTimeout(this.timeOut);
             var now: Date = new Date();
             this.pausePeriod = (now.valueOf() - this.timeOutTime.valueOf());
             this.timeOutTime = undefined;
+            return this;
         }
 
-        resume(): void {
+        public resume(): TimeSimulator {
             super.resume();
-            this.simulate();
+            return this.simulate();
         }
 
-        simulate(): void {
-            if (!this.pause()) {
+        public simulate(): TimeSimulator {
+            if (!this.pause() || !this.isRunning()) {
                 this.timeOutTime = new Date();
                 var toTime:number = this.getTikPeriod();
                 this.timeOut = setTimeout(function(): void {
@@ -67,6 +70,11 @@
                     this.setCurrentTime(time);
                 }.bind(this), toTime);
             }
+            return this;
+        }
+
+        public execute(): TimeSimulator {
+            return this.simulate();
         }
     }
 }

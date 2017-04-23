@@ -1,12 +1,13 @@
-﻿module Simulation {
+﻿/// <reference path="Simulator.ts" />
+module Simulation {
     "use strict";
     export class EventSimulator extends Simulator {
-        resume():void {
+        public resume(): EventSimulator {
             super.resume();
-            this.simulate();
+            return this.simulate();
         }
 
-        simulate(): void {
+        public simulate(): EventSimulator {
             if (!this.isRunning() || this.isPause()) {
                 if (this.isPause()) {
                     this.resume();
@@ -18,6 +19,7 @@
                     this.stop();
                 }
             }
+            return this;
         }
     }
 }
