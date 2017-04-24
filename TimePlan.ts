@@ -68,7 +68,7 @@ module Simulation {
 
         public addEvent(node: Event): TimePlan {
             if (node !== undefined) {
-                super.addNode(node);
+                super.add(node);
                 if (node.compare(this.getRoot()) === 0) {
                     this.setNextTime(node.priority());
                 }
@@ -77,7 +77,7 @@ module Simulation {
         }
 
         public removeMinPriorityEvent(): Event {
-            var result: Event = <Event>super.removeMinPriority();
+            var result: Event = <Event>super.removeMinPriorityNode();
             if (!this.isEmpty()) {
                 this.setNextTime(this.getRoot().priority());
             } else {
@@ -87,7 +87,7 @@ module Simulation {
         }
 
         public getMinpriorityEvent(): Event {
-            return this.getRoot();
+            return <Event>this.getMinPiorityNode();
         }
     }
 }

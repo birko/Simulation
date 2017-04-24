@@ -1,7 +1,7 @@
 ﻿/// <reference path="TimePlan.ts" />
 module Simulation {
     "use strict";
-    export class AbstractSimulator {
+    export abstract class AbstractSimulator {
         private currentTime: number = undefined;
         private paused: boolean = false;
 
@@ -47,13 +47,9 @@ module Simulation {
             return this;
         }
 
-        public execute(): AbstractSimulator {
-            throw new Error("This method is abstract");
-        }
+        public abstract execute(): AbstractSimulator;
 
-        public addEvent(time: number, func: EventFunction = null): AbstractSimulator{
-            throw new Error("This method is abstract");
-        }
+        public abstract addEvent(time: number, func: EventFunction): AbstractSimulator;
     }
 
     export class Simulator extends AbstractSimulator {

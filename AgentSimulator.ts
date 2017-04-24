@@ -101,7 +101,7 @@ module Simulation {
             return this;
         }
 
-        public exexute(): AgentSimulator {
+        public execute(): AgentSimulator {
             return this.simulate();
         }
 
