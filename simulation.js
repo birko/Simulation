@@ -1,9 +1,14 @@
-var __extends = (this && this.__extends) || function (d, b) {
-    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-    function __() { this.constructor = d; }
-    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-};
 "use strict";
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
 var DataStructures;
 (function (DataStructures) {
     "use strict";
@@ -242,7 +247,6 @@ var DataStructures;
     }());
     DataStructures.AbstractFactory = AbstractFactory;
 })(DataStructures || (DataStructures = {}));
-"use strict";
 var DataStructures;
 (function (DataStructures) {
     var Tree;
@@ -544,7 +548,6 @@ var DataStructures;
         Tree.AbstractTree = AbstractTree;
     })(Tree = DataStructures.Tree || (DataStructures.Tree = {}));
 })(DataStructures || (DataStructures = {}));
-"use strict";
 var DataStructures;
 (function (DataStructures) {
     var Tree;
@@ -704,7 +707,6 @@ var DataStructures;
         Tree.BinaryTree = BinaryTree;
     })(Tree = DataStructures.Tree || (DataStructures.Tree = {}));
 })(DataStructures || (DataStructures = {}));
-"use strict";
 var DataStructures;
 (function (DataStructures) {
     var Tree;
@@ -881,7 +883,6 @@ var DataStructures;
         Tree.PairingHeap = PairingHeap;
     })(Tree = DataStructures.Tree || (DataStructures.Tree = {}));
 })(DataStructures || (DataStructures = {}));
-"use strict";
 var Simulation;
 (function (Simulation) {
     "use strict";
@@ -961,7 +962,6 @@ var Simulation;
     }(DataStructures.Tree.PairingHeap));
     Simulation.TimePlan = TimePlan;
 })(Simulation || (Simulation = {}));
-"use strict";
 var Simulation;
 (function (Simulation) {
     "use strict";
@@ -1057,7 +1057,6 @@ var Simulation;
     }(AbstractSimulator));
     Simulation.Simulator = Simulator;
 })(Simulation || (Simulation = {}));
-"use strict";
 var Simulation;
 (function (Simulation) {
     "use strict";
@@ -1131,7 +1130,6 @@ var Simulation;
     }(Simulation.Simulator));
     Simulation.TimeSimulator = TimeSimulator;
 })(Simulation || (Simulation = {}));
-"use strict";
 var Simulation;
 (function (Simulation) {
     "use strict";
@@ -1248,7 +1246,6 @@ var Simulation;
     }(Simulation.AbstractSimulator));
     Simulation.AgentSimulator = AgentSimulator;
 })(Simulation || (Simulation = {}));
-"use strict";
 var Simulation;
 (function (Simulation) {
     "use strict";
@@ -1279,7 +1276,6 @@ var Simulation;
     }(Simulation.Simulator));
     Simulation.EventSimulator = EventSimulator;
 })(Simulation || (Simulation = {}));
-"use strict";
 var Simulation;
 (function (Simulation) {
     "use strict";

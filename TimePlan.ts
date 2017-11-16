@@ -22,7 +22,7 @@ module Simulation {
         }
 
         /// TODO: Async await, promise
-        /*async*/ public execute(): Event {
+        public /*async*/ execute(): Event {
             if (this.func !== undefined && this.func !== null)
             {
                 /*await*/ this.func();

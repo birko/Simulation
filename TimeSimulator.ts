@@ -6,7 +6,6 @@
         private timeOut: number = undefined;
         private timeOutTime:Date = undefined;
         private speed: number = 1;
-       
 
         constructor(timePlan: TimePlan, period: number) {
             super(timePlan);
